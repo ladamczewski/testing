@@ -36,7 +36,17 @@ public class Meal {
         this.price = price;
     }
 
+    @Override
+    public String toString() {
+        return " price=" + price +
+                ", name='" + name + " ";
+    }
+
     public int getDiscountedPrice(int discount){
+
+        if(discount > this.price){
+            throw new IllegalArgumentException("Discount cannot be higher then price!");
+        }
         return this.price - discount;
     }
 }
