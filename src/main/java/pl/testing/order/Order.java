@@ -1,4 +1,6 @@
-package pl.testing;
+package pl.testing.order;
+
+import pl.testing.Meal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +32,17 @@ public class Order {
                 '}';
     }
 
-    void cancel(){
+    public void cancel(){
         this.meals.clear();
+    }
+
+    public int totalPrice(){
+        int sum = this.meals.stream().mapToInt(meal ->meal.getPrice()).sum();
+        if(sum<0){
+            throw new IllegalStateException("Total price oversize Integer");
+        }
+        else {
+            return sum;
+        }
     }
 }

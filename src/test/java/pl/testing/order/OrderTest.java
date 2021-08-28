@@ -1,8 +1,11 @@
-package pl.testing;
+package pl.testing.order;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import pl.testing.Meal;
+import pl.testing.extensions.BeforAfterExtension;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,7 +13,9 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@ExtendWith(BeforAfterExtension.class)
 class OrderTest {
     private Order order;
 
@@ -19,7 +24,7 @@ class OrderTest {
         order = new Order();
     }
     @AfterEach
-    void cleanUp(){
+    void cleanUp() {
         order.cancel();
     }
     @Test
@@ -94,5 +99,45 @@ class OrderTest {
 
         //then
         assertThat(meals1, is(meals2));
+    }
+
+    @Test
+    void orderTotalPriceShouldNotExceedsMAxIntValue(){
+        //given
+        Meal meal = new Meal(Integer.MAX_VALUE, "hot dog");
+        Meal meal1 = new Meal(13, "burger");
+        Meal meal2 = new Meal(8, "toast");
+
+        order.addMealToOrder(meal);
+        order.addMealToOrder(meal1);
+        order.addMealToOrder(meal2);
+
+        //when
+        //then
+        assertThrows(IllegalStateException.class, ()->order.totalPrice());
+    }
+    @Test
+    void emptyOrderTotalPriceShouldBeEqualZero(){
+        //given
+        //Order is Created BeforeEach
+
+        //then
+        assertThat(order.totalPrice(), is(0));
+    }
+
+    @Test
+    void cancelingOrderShouldClearMealsFromList(){
+        //given
+        Meal meal = new Meal(11, "hot dog");
+        Meal meal1 = new Meal(13, "burger");
+        Meal meal2 = new Meal(8, "toast");
+        order.addMealToOrder(meal);
+        order.addMealToOrder(meal1);
+        order.addMealToOrder(meal2);
+        //when
+        order.cancel();
+
+        //then
+        assertThat(order.getMeals().size(), is(0));
     }
 }

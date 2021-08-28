@@ -1,0 +1,9 @@
+pl\testing\OrderBackup.class
+pl\testing\Meal.class
+pl\testing\OrderStatus.class
+pl\testing\Account.class
+pl\testing\Order.class
+pl\testing\Cart.class
+pl\testing\BeforAfterExtension.class
+pl\testing\Address.class
+pl\testing\IAExceptionIgnore.class

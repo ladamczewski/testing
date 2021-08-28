@@ -1,4 +1,4 @@
-package pl.testing;
+package pl.testing.exercise;
 
 import java.util.Objects;
 

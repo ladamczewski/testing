@@ -1,0 +1,7 @@
+pl\testing\OrderBackupTest.class
+pl\testing\OrderTest.class
+pl\testing\CartTest.class
+pl\testing\MealTest.class
+pl\testing\OrderStatusTest.class
+pl\testing\AccountTest.class
+pl\testing\AddressTest.class

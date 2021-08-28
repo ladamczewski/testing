@@ -1,8 +1,11 @@
-package pl.testing;
+package pl.testing.account;
 
 import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumingThat;
 
 class AccountTest {
     @Test
@@ -47,4 +50,39 @@ class AccountTest {
         //then
         assertNotNull(account.getDefaultDeliveryAddress());
     }
+
+    @Test
+    void newAccountWithNotNullAddressShouldBeActive(){
+        //given
+        Address address = new Address("Puławska", "111");
+
+        //when
+        Account account = new Account(address);
+
+        //then
+        assumingThat( address != null, () -> {
+            assertTrue(account.isActive());
+        });
+    }
+
+    @Test
+    void invalidEmailShouldThrowException(){
+        //given
+        Account account = new Account();
+
+        //when
+        //then
+        assertThrows(IllegalArgumentException.class, ()->account.setEmail("ubububu"));
+    }
+    @Test
+    void validEmailShouldBeNotNull(){
+        //given
+        Account account = new Account();
+
+        //when
+        account.setEmail("bubu@wp.pl");
+        //then
+        assertThat(account.getEmail(), is("bubu@wp.pl"));
+    }
+
 }
