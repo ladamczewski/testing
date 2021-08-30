@@ -7,6 +7,8 @@ import java.util.List;
 
 public class Order {
 
+    private OrderStatus orderStatus;
+
     public List<Meal> getMeals() {
         return meals;
     }
@@ -25,6 +27,9 @@ public class Order {
 
     private List<Meal> meals = new ArrayList<>();
 
+    public void changeOrderStatus(OrderStatus orderStatus){
+        this.orderStatus = orderStatus;
+    }
     @Override
     public String toString() {
         return "Order=" +
@@ -44,5 +49,9 @@ public class Order {
         else {
             return sum;
         }
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
     }
 }

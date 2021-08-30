@@ -1,2 +1,16 @@
-package pl.testing.account;public class AccountService {
+package pl.testing.account;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class AccountService {
+    AccountRepository accountRepository;
+
+    public AccountService(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
+
+    List<Account> getAllActiveAccount(){
+        return accountRepository.getAllAccounts().stream().filter(Account::isActive).collect(Collectors.toList());
+    }
 }

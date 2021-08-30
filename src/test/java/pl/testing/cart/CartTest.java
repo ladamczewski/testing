@@ -1,4 +1,4 @@
-package pl.testing;
+package pl.testing.cart;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
